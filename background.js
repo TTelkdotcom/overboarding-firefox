@@ -112,8 +112,17 @@ async function download(msg) {
   }
 }
 
+function isHttpsUrl(url) {
+  try {
+    return new URL(url).protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === 'download' && msg.url) {
+  // Never fetch or download anything that is not a plain https address
+  if (msg.action === 'download' && isHttpsUrl(msg.url)) {
     download(msg);
   }
 });
