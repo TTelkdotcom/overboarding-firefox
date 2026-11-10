@@ -8,7 +8,11 @@
       const params = new URL(location.href).searchParams;
       const original = params.get('originalUrl');
       const raw = original || params.get('pdfUrl');
-      return raw ? { url: decodeURIComponent(raw), isPdf: !original } : null;
+      if (!raw) return null;
+      const url = decodeURIComponent(raw);
+      // Only offer downloads for https file addresses
+      if (new URL(url).protocol !== 'https:') return null;
+      return { url, isPdf: !original };
     } catch {
       return null;
     }
@@ -62,7 +66,9 @@
       alignItems: 'center',
     });
 
-    btn.onclick = () => {
+    btn.onclick = (event) => {
+      // Ignore clicks scripted by the page; only a real user click may start a download
+      if (!event.isTrusted) return;
       chrome.runtime.sendMessage({ action: 'download', url, filename, isPdf });
       btn.innerHTML = `${ICON}Downloading...`;
       btn.style.background = BUSY_BG;
