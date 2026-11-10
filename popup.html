@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overboarding</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      color: #4a4a4a;
+      background: #fff;
+      width: 260px;
+    }
+
+    .header {
+      background: #4a4a4a;
+      color: #fff;
+      padding: 14px 16px;
+    }
+
+    .header svg {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .header h1 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .header p {
+      font-size: 11px;
+      color: #fff;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .content {
+      padding: 14px 16px;
+    }
+
+    .step {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .step-num {
+      background: #4a4a4a;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-text {
+      color: #4a4a4a;
+      line-height: 1.5;
+      padding-top: 1px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #4a4a4a;
+      opacity: 0.2;
+      margin: 10px 0;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .toggle-row input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .switch {
+      position: relative;
+      flex-shrink: 0;
+      width: 34px;
+      height: 20px;
+      border: 1px solid #4a4a4a;
+      border-radius: 10px;
+      background: #fff;
+      transition: background 0.15s;
+    }
+
+    .switch::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #4a4a4a;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .toggle-row input:checked + .switch {
+      background: #4a4a4a;
+    }
+
+    .toggle-row input:checked + .switch::after {
+      background: #fff;
+      transform: translateX(14px);
+    }
+
+    .toggle-row input:focus-visible + .switch {
+      outline: 2px solid #4a4a4a;
+      outline-offset: 2px;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #4a4a4a;
+      line-height: 1.5;
+    }
+
+    .note a {
+      color: #4a4a4a;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Overboarding"><path d="M12 3v13M5 14l7 7 7-7"/><path d="M3 21h18"/></svg>
+    <h1>Overboarding</h1>
+    <p>Download all content from black board easily, with one click.</p>
+  </div>
+
+  <div class="content">
+    <label class="toggle-row">
+      <span>Show download buttons</span>
+      <input type="checkbox" id="show-toggle" checked />
+      <span class="switch"></span>
+    </label>
+    <hr class="divider" />
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Open a content item in Blackboard with no download button.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">A <strong>Download</strong> button appears in the top-right corner.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Click it — the file saves to your downloads folder.</div>
+    </div>
+
+    <hr class="divider" />
+    <p class="note">Adapted from Reuban Ramsden's <a href="https://github.com/reubxn/OverBoard" target="_blank">Overboard</a> by Linus Klett</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
